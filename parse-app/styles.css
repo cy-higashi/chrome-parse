@@ -1,0 +1,94 @@
+/* ポップアップ全体の幅を広げ、折り返しを抑制 */
+body {
+  width: 400px; /* 必要に応じてさらに調整 */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 10px;
+}
+
+/* ヘッダー部分 */
+.header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.header-icon {
+  width: 40px; 
+  height: 40px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* トグルボタンの基本スタイル */
+.toggle-btn {
+  background-color: #6e6e6e; /* グレー系 */
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 「▶ 楽天」「▶ Amazon」を左寄せ */
+}
+
+.toggle-btn:hover {
+  background-color: #5a5a5a;
+}
+
+/* トグルで開閉されるメニュー領域 */
+.menu-content {
+  display: none;
+  margin-top: 5px; /* ちょっと余白 */
+}
+
+/* メニュー内のボタン共通設定 */
+.menu-button {
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* アイコンとテキストを左寄せ */
+}
+
+/* ボタンにマウスオーバーした時 */
+.menu-button:hover {
+  filter: brightness(90%);
+}
+
+/* 楽天用ボタンは赤色に */
+.rakuten-btn {
+  background-color: #cc0000;
+}
+
+/* Amazon用ボタンはオレンジ色に */
+.amazon-btn {
+  background-color: #ff9900;
+}
+
+/* ボタン内のロゴ画像を円形トリミング */
+.button-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.choice-btn {
+  background-color: #f16565; /* 任意の色に変更OK */
+}

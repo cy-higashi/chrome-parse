@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>楽天・Amazonツール</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ヘッダー部分 -->
+  <div class="header">
+    <img src="./icon.png" alt="Icon" class="header-icon">
+    <h2>市場調査 社内ツール</h2>
+  </div>
+
+  <!-- 楽天メニュー -->
+  <div class="menu-toggle">
+    <!-- 初期は閉じている想定で「▶ 楽天」 -->
+    <button class="toggle-btn" id="toggle-rakuten">▶ 楽天検索結果</button>
+    <div class="menu-content" id="rakuten-menu">
+      <button id="fetch-rakuten" class="menu-button rakuten-btn">
+        <img src="./icons/rakuten_logo.png" alt="Rakuten Logo" class="button-icon">
+        楽天一覧のダウンロード
+      </button>
+      <button id="fetch-histogram" class="menu-button rakuten-btn">
+        <img src="./icons/rakuten_logo.png" alt="Rakuten Logo" class="button-icon">
+        楽天ヒストグラムダウンロード
+      </button>
+      <button id="fetch-suggest" class="menu-button rakuten-btn">
+        <img src="./icons/rakuten_logo.png" alt="Rakuten Logo" class="button-icon">
+        楽天サジェストのダウンロード
+      </button>
+      <button id="fetch-furusatoranking" class="menu-button rakuten-btn">
+        <img src="./icons/rakuten_logo.png" alt="Rakuten Logo" class="button-icon">
+        楽天ふるさと納税ランキングのダウンロード
+      </button>
+      <button id="fetch-ranking" class="menu-button rakuten-btn">
+        <img src="./icons/rakuten_logo.png" alt="Rakuten Logo" class="button-icon">
+        楽天市場ランキングのダウンロード
+      </button>
+    </div>
+  </div>
+
+  <!-- Amazonメニュー -->
+  <div class="menu-toggle">
+    <!-- 初期は閉じている想定で「▶ Amazon」 -->
+    <button class="toggle-btn" id="toggle-amazon">▶ Amazon検索結果</button>
+    <div class="menu-content" id="amazon-menu">
+      <button id="fetch-amazon" class="menu-button amazon-btn">
+        <img src="./icons/amazon_logo.png" alt="Amazon Logo" class="button-icon">
+        Amazon一覧のダウンロード
+      </button>
+      <button id="fetch-amazonsuggest" class="menu-button amazon-btn">
+        <img src="./icons/amazon_logo.png" alt="Amazon Logo" class="button-icon">
+        Amazonサジェストのダウンロード
+      </button>
+      <button id="fetch-amazonsummary" class="menu-button amazon-btn">
+        <img src="./icons/amazon_logo.png" alt="Amazon Logo" class="button-icon">
+        Amazon検索情報取得
+      </button>
+      <button id="fetch-amazonranking" class="menu-button amazon-btn">
+        <img src="./icons/amazon_logo.png" alt="Amazon Logo" class="button-icon">
+        Amazonランキングのダウンロード
+      </button>
+    </div>
+  </div>
+
+  <!-- チョイスメニュー -->
+  <div class="menu-toggle">
+    <!-- 初期は閉じている想定で「▶ チョイス」 -->
+    <button class="toggle-btn" id="toggle-choice">▶ チョイス検索結果</button>
+    <div class="menu-content" id="choice-menu">
+      <button id="fetch-choice" class="menu-button choice-btn">
+        <img src="./icons/choice_logo.png" alt="choice Logo" class="button-icon">
+        チョイス一覧のダウンロード
+      </button>
+      <button id="fetch-choicecategory" class="menu-button choice-btn">
+        <img src="./icons/choice_logo.png" alt="choice Logo" class="button-icon">
+        チョイスカテゴリーのダウンロード
+      </button>
+      <button id="fetch-choicesuggest" class="menu-button choice-btn">
+        <img src="./icons/choice_logo.png" alt="choice Logo" class="button-icon">
+        チョイスサジェストのダウンロード
+      </button>
+      <button id="fetch-choiceranking" class="menu-button choice-btn">
+        <img src="./icons/choice_logo.png" alt="choice Logo" class="button-icon">
+        チョイスランキングのダウンロード
+      </button>
+      <button id="fetch-choiceriseranking" class="menu-button choice-btn">
+        <img src="./icons/choice_logo.png" alt="choice Logo" class="button-icon">
+        チョイス急上昇ランキングのダウンロード
+      </button>
+      <button id="fetch-choicemunicipalityranking" class="menu-button choice-btn">
+        <img src="./icons/choice_logo.png" alt="choice Logo" class="button-icon">
+        チョイス自治体別ランキングのダウンロード
+      </button>
+    </div>
+  </div>
+
+    <!-- 楽天個別メニュー -->
+    <div class="menu-toggle">
+      <!-- 初期は閉じている想定で「▶ 楽天」 -->
+      <button class="toggle-btn" id="toggle-rakuten-each">▶ 楽天個別</button>
+      <div class="menu-content" id="rakuten-each-menu">
+        <button id="fetch-rakutenproduct" class="menu-button rakuten-btn">
+          <img src="./icons/rakuten_logo.png" alt="Rakuten Logo" class="button-icon">
+          楽天個別商品情報のダウンロード
+        </button>
+      </div>
+    </div>
+
+    <!-- Amazon個別メニュー -->
+    <div class="menu-toggle">
+      <!-- 初期は閉じている想定で「▶ Amazon」 -->
+      <button class="toggle-btn" id="toggle-amazon-each">▶ Amazon個別</button>
+      <div class="menu-content" id="amazon-each-menu">
+        <button id="fetch-amazonproduct" class="menu-button amazon-btn">
+          <img src="./icons/amazon_logo.png" alt="Amazon Logo" class="button-icon">
+          Amazon個別商品情報のダウンロード
+        </button>
+      </div>
+    </div>
+
+    <!-- チョイス個別メニュー -->
+    <div class="menu-toggle">
+      <!-- 初期は閉じている想定で「▶ チョイス」 -->
+      <button class="toggle-btn" id="toggle-choice-each">▶ チョイス個別</button>
+      <div class="menu-content" id="choice-each-menu">
+        <button id="fetch-choiceproduct" class="menu-button choice-btn">
+          <img src="./icons/choice_logo.png" alt="Choice Logo" class="button-icon">
+          チョイス個別商品情報のダウンロード
+        </button>
+      </div>
+    </div>
+
+  <script src="libs/encoding.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
