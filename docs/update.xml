@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gupdate xmlns="http://www.google.com/update2/response" protocol="2.0">
   <app appid="jfmaliflcblkcajiedfckggjkegkalbf">
-    <updatecheck codebase="https://cy-higashi.github.io/chrome-parse/docs/parse-app.crx"
+    <updatecheck codebase="https://cy-higashi.github.io/chrome-parse/parse-app.crx"
                  version="1.0.0" />
   </app>
 </gupdate> 
