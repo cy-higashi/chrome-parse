@@ -28,12 +28,23 @@
       }
     }
   
+    function getCurrentPageNumber() {
+      var pageElem = document.querySelector('span.s-pagination-selected');
+      if (pageElem) {
+        var num = parseInt(pageElem.innerText.trim(), 10);
+        return isNaN(num) ? "" : num;
+      }
+      return "";
+    }
+  
     // Amazonの検索結果ページから、各商品のコンテナ内の「商品名」と「価格」を抽出する
-    function extractAmazonData() {
+    function extractAmazonData(pageNumber) {
       var containers = document.querySelectorAll('[data-component-type="s-search-result"]');
       var extractedData = [];
-      containers.forEach(function(container) {
+      containers.forEach(function(container, index) {
         var entry = {};
+        entry["No"] = index + 1; // ページ上部順の番号を追加
+        entry["Page"] = pageNumber; // ページ番号を追加
   
         // タイトルの抽出例（新しいセレクタ）
         try {
@@ -346,8 +357,8 @@
     // エンコーディングライブラリ読み込み後、「もっとみる」ボタン処理、データ抽出、CSVダウンロードの流れを実行
     loadEncodingLibrary(function() {
       clickLoadMoreButton(function() {
-        // 「もっとみる」処理後に全商品データを抽出
-        var data = extractAmazonData();
+        var pageNumber = getCurrentPageNumber();
+        var data = extractAmazonData(pageNumber);
         downloadCSV(data);
       });
     });

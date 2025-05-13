@@ -14,12 +14,14 @@
       }
     }
   
-    function extractRakutenData() {
+    function extractRakutenData(pageNumber) {
       var blockSelector = "#root > div.dui-container.main > div.dui-container.content > div.searchResults > div > div > div > div";
       var blockElements = Array.from(document.querySelectorAll(blockSelector));
       
-      var extractedData = blockElements.map(function(block) {
+      var extractedData = blockElements.map(function(block, index) {
         var entry = {};
+        entry["No"] = index + 1;
+        entry["Page"] = pageNumber;
         try { entry["Title"] = block.querySelector("div.title--2KRhr.title-grid--18AUw > h2 > a")?.innerText.trim() || "N/A"; } catch(e){ entry["Title"] = "N/A"; }
         try { entry["URL"] = block.querySelector("div.title--2KRhr.title-grid--18AUw > h2 > a")?.href || "N/A"; } catch(e){ entry["URL"] = "N/A"; }
         try { entry["Price"] = block.querySelector("div:nth-child(3) > div.price-wrapper--10ccL > div")?.innerText.trim() || "N/A"; } catch(e){ entry["Price"] = "N/A"; }
@@ -34,6 +36,15 @@
       });
   
       return extractedData;
+    }
+  
+    function getCurrentPageNumber() {
+      var pageElem = document.querySelector('a.item.-active.currentPage');
+      if (pageElem) {
+        var num = parseInt(pageElem.innerText.trim(), 10);
+        return isNaN(num) ? "" : num;
+      }
+      return "";
     }
   
     function downloadCSV(data) {
@@ -68,7 +79,8 @@
   
     // エンコーディングライブラリを読み込んでから実行
     loadEncodingLibrary(() => {
-      let extractedData = extractRakutenData();
+      let pageNumber = getCurrentPageNumber();
+      let extractedData = extractRakutenData(pageNumber);
       downloadCSV(extractedData);
     });
   })();

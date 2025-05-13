@@ -14,13 +14,24 @@
       }
     }
   
+    function getCurrentPageNumber() {
+      var pageElem = document.querySelector('li.nv-pager__item.is-current a');
+      if (pageElem) {
+        var num = parseInt(pageElem.innerText.trim(), 10);
+        return isNaN(num) ? "" : num;
+      }
+      return "";
+    }
+  
     // ふるさとチョイスの検索結果ページから、各商品のコンテナ内の「タイトル」と「価格」を抽出する
-    function extractFurusatoData() {
+    function extractFurusatoData(pageNumber) {
       // 各商品のコンテナは li.search-result-card であると仮定
       var containers = document.querySelectorAll('li.search-result-card');
       var extractedData = [];
-      containers.forEach(function(container) {
+      containers.forEach(function(container, index) {
         var entry = {};
+        entry["No"] = index + 1; // ページ上部順の番号を追加
+        entry["Page"] = pageNumber; // ページ番号を追加
   
         // タイトルの抽出 (.card-product__title)
         try {
@@ -104,7 +115,8 @@
   
     // エンコーディングライブラリ読み込み後、データ抽出・CSVダウンロードの流れを実行
     loadEncodingLibrary(function() {
-      var data = extractFurusatoData();
+      var pageNumber = getCurrentPageNumber();
+      var data = extractFurusatoData(pageNumber);
       downloadCSV(data);
     });
   })();
