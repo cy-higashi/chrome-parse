@@ -5,6 +5,7 @@
     "description": "楽天・Amazon・チョイスの検索結果一覧を取得し、CSVとしてダウンロードする拡張機能。scriptingとactiveTabは検索結果取得に、downloadsはCSVファイル保存に使用。",
     "permissions": ["scripting", "activeTab", "downloads"],
     "host_permissions": ["*://*.rakuten.co.jp/*"],
+    "update_url": "https://cy-higashi.github.io/chrome-parse/update.xml",
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
