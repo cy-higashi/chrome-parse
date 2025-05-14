@@ -5,6 +5,7 @@ Run this script in PowerShell without additional arguments.
 """
 import subprocess
 import os
+import shutil
 
 # === Configuration ===
 # Path to Chrome executable
@@ -37,6 +38,13 @@ if __name__ == "__main__":
     try:
         crx_file = pack_crx_with_chrome(chrome_exe, src_dir, key_file)
         print(f"Generated CRX3 with proof at: {crx_file}")
+        # === 追加: /docs/に移動し、上書き ===
+        docs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'docs')
+        if not os.path.exists(docs_dir):
+            os.makedirs(docs_dir)
+        dest_path = os.path.join(docs_dir, os.path.basename(crx_file))
+        shutil.move(crx_file, dest_path)
+        print(f"Moved CRX to: {dest_path}")
     except Exception as e:
         print(f"Error: {e}")
         exit(1)
