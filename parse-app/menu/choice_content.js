@@ -76,6 +76,22 @@
         } catch (e) {
             entry["Explanation"] = "";
         }
+
+        // 商品リンクの抽出 (a.card-product__link)
+        try {
+          var linkElem = container.querySelector('a.card-product__link');
+          entry["ProductLink"] = linkElem ? linkElem.href : "";
+        } catch (e) {
+          entry["ProductLink"] = "";
+        }
+
+        // 商品説明の抽出 (div.card-product__text > p)
+        try {
+          var descriptionElem = container.querySelector('a.card-product__link > div.card-product__contents > div.card-product__text > p');
+          entry["Description"] = descriptionElem ? descriptionElem.innerText.trim() : "";
+        } catch (e) {
+          entry["Description"] = "";
+        }
                 
         extractedData.push(entry);
       });

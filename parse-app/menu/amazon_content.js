@@ -54,6 +54,14 @@
           entry["Title"] = "";
         }
   
+        // 商品リンクの抽出（指定されたセレクター）
+        try {
+          var linkElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style > a');
+          entry["ProductLink"] = linkElem ? linkElem.href : "";
+        } catch (e) {
+          entry["ProductLink"] = "";
+        }
+  
         // 価格の抽出
         try {
           var priceElem = container.querySelector(

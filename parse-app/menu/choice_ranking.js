@@ -70,6 +70,14 @@
           entry["City"] = "";
         }
   
+        // 商品リンクの抽出（a.card-product__link.product-slider__product_detail）
+        try {
+          var linkElem = container.querySelector('a.card-product__link.product-slider__product_detail');
+          entry["ProductLink"] = linkElem ? linkElem.href : "";
+        } catch (e) {
+          entry["ProductLink"] = "";
+        }
+  
         extractedData.push(entry);
       });
       return extractedData;

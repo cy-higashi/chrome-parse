@@ -18,25 +18,32 @@
     // 今回は簡易的に「何度かスクロールを繰り返す」例を示します
     function autoScrollToLoadAll(callback) {
         let scrollCount = 0;
-        let maxScrollCount = 30; // 何回繰り返すか（適宜調整）
+        let maxScrollCount = 50; // 安全装置として最大回数は残しておく
+        let lastScrollHeight = 0;
 
         let scrollInterval = setInterval(() => {
         scrollCount++;
+        
         // 現在のスクロール位置と最大スクロール位置
         let currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         let maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let currentScrollHeight = document.documentElement.scrollHeight;
 
         // 画面を少し下にスクロール
         window.scrollBy(0, 1000);
 
-        // 一番下付近まで到達した、もしくは一定回数スクロールしたら終了
-        if (currentScroll >= maxScroll || scrollCount >= maxScrollCount) {
+        // 一番下に到達したか、またはページの高さが変わらなくなった（コンテンツの読み込み完了）
+        if (currentScroll >= maxScroll - 100 || 
+            (scrollCount > 3 && currentScrollHeight === lastScrollHeight) || 
+            scrollCount >= maxScrollCount) {
             clearInterval(scrollInterval);
-            // 最後に2秒待ってからコールバックを呼び出し、データ抽出へ
-            setTimeout(callback, 1000);
+            // すぐにコールバックを呼び出し、データ抽出へ
+            setTimeout(callback, 500);
         }
-        }, 3000); 
-        // ↑ 1.5秒おきにスクロール、という例。読み込みが遅い場合は増やす
+        
+        lastScrollHeight = currentScrollHeight;
+        }, 800); 
+        // ↑ 0.8秒おきにスクロール、より短い間隔で効率的に
     }
   
     // 「もっとみる」ボタンが存在すればクリックし、1〜2秒後にコールバックを実行
@@ -54,8 +61,8 @@
   
     // ランキングページから、上記コードと同じ項目＋「ランキング順位」を抽出
     function extractAmazonRankingData() {
-      // data-asinを持つコンテナを一括取得
-      let containers = document.querySelectorAll('div[data-asin]');
+      // data-asinを持つコンテナを一括取得（#ewc-content内は除外）
+      let containers = document.querySelectorAll('div[data-asin]:not(#ewc-content div[data-asin])');
       let extractedData = [];
   
       containers.forEach(function(container) {
@@ -69,6 +76,16 @@
           entry["Ranking"] = rankElem ? rankElem.innerText.trim() : "";
         } catch (e) {
           entry["Ranking"] = "";
+        }
+  
+        // -----------------------------
+        // 商品リンクURL
+        // -----------------------------
+        try {
+          let linkElem = container.querySelector('div > div > a');
+          entry["ProductLink"] = linkElem ? linkElem.href : "";
+        } catch (e) {
+          entry["ProductLink"] = "";
         }
   
         // -----------------------------
