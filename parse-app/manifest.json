@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "市場調査・情報取得用社内ツール",
-    "version": "1.0",
+    "version": "1.3",
     "description": "楽天・Amazon・チョイスの検索結果一覧を取得し、CSVとしてダウンロードする拡張機能。scriptingとactiveTabは検索結果取得に、downloadsはCSVファイル保存に使用。",
     "permissions": ["scripting", "activeTab", "downloads"],
     "host_permissions": ["*://*.rakuten.co.jp/*"],
