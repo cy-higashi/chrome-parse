@@ -31,7 +31,7 @@
             var dispRank = container.querySelector(".rnkRanking_dispRank");
             rank = dispRank ? dispRank.innerText.trim() : "";
           }
-          entry["Rank"] = rank;
+          entry["SEO順位"] = rank;
           
           // 【商品URL】：画像リンク内のaタグのhref
           var prodLinkElem = container.querySelector(".rnkRanking_imageBox a");
