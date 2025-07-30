@@ -35,11 +35,11 @@
           
           // 【商品URL】：画像リンク内のaタグのhref
           var prodLinkElem = container.querySelector(".rnkRanking_imageBox a");
-          entry["Product URL"] = prodLinkElem ? prodLinkElem.href : "";
+          entry["URL"] = prodLinkElem ? prodLinkElem.href : "";
           
           // 【商品名】：.rnkRanking_itemName a のテキスト
           var prodNameElem = container.querySelector(".rnkRanking_itemName a");
-          entry["Product Name"] = prodNameElem ? prodNameElem.innerText.trim() : "";
+          entry["Title"] = prodNameElem ? prodNameElem.innerText.trim() : "";
           
           // 【価格】：.rnkRanking_price のテキスト
           var priceElem = container.querySelector(".rnkRanking_price");
@@ -48,7 +48,7 @@
           // 【評価】：星の個数を算出（.rnkRanking_starONは1点、.rnkRanking_starHALFは0.5点）
           var fullStars = container.querySelectorAll(".rnkRanking_starBox .rnkRanking_starON").length;
           var halfStars = container.querySelectorAll(".rnkRanking_starBox .rnkRanking_starHALF").length;
-          entry["Rating"] = (fullStars + halfStars * 0.5).toString();
+          entry["ReviewScore"] = (fullStars + halfStars * 0.5).toString();
           
           // 【レビュー件数】：例「レビュー(24,227件)」の中から数字部分のみ抽出
           var reviewLink = container.querySelector(".rnkRanking_starBox a");
@@ -56,15 +56,15 @@
             var reviewText = reviewLink.innerText.trim();
             // 「レビュー(」と「件)」を取り除く
             reviewText = reviewText.replace("レビュー(", "").replace("件)", "").replace(/,/g, "");
-            entry["Review Count"] = reviewText;
+            entry["ReviewCount"] = reviewText;
           } else {
-            entry["Review Count"] = "";
+            entry["ReviewCount"] = "";
           }
           
           // 【ショップ名】＆【ショップURL】：.rnkRanking_shop a
           var shopLinkElem = container.querySelector(".rnkRanking_shop a");
-          entry["Shop Name"] = shopLinkElem ? shopLinkElem.innerText.trim() : "";
-          entry["Shop URL"] = shopLinkElem ? shopLinkElem.href : "";
+          entry["Seller"] = shopLinkElem ? shopLinkElem.innerText.trim() : "";
+          entry["SellerURL"] = shopLinkElem ? shopLinkElem.href : "";
   
           data.push(entry);
         });
