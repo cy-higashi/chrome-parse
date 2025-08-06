@@ -227,7 +227,9 @@
         }
         try {
           var ratingElem = container.querySelector('div > div > div > div > span > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(5) > span > span.exts-color-border-black.grade-hover.ml-ext-3.el-tooltip__trigger.el-tooltip__trigger > span:nth-child(2)');
-          entry["ReviewCount"] = ratingElem ? ratingElem.innerText.trim() : "";
+          var reviewCountText = ratingElem ? ratingElem.innerText.trim() : "";
+          // 括弧を除去する処理
+          entry["ReviewCount"] = reviewCountText.replace(/[()]/g, '');
         } catch (e) {
           entry["ReviewCount"] = "";
         }
