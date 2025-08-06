@@ -57,9 +57,9 @@
         // 商品リンクの抽出（指定されたセレクター）
         try {
           var linkElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-title-instructions-style > a');
-          entry["ProductLink"] = linkElem ? linkElem.href : "";
+          entry["URL"] = linkElem ? linkElem.href : "";
         } catch (e) {
-          entry["ProductLink"] = "";
+          entry["URL"] = "";
         }
   
         // 価格の抽出
@@ -74,32 +74,24 @@
 
         try {
           var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(2) > div.a-row.a-size-base > span');
-          entry["Sales figures"] = ratingElem ? ratingElem.innerText.trim() : "";
+          entry["ReviewScore"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
-          entry["Sales figures"] = "";
+          entry["ReviewScore"] = "";
         }
 
         try {
-          var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-price-instructions-style > div.a-row.a-size-base.a-color-base > div:nth-child(1) > a > span.a-size-base.a-color-secondary');
+          var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-price-instructions-style > div.a-row.a-size-base.a-color-secondary > span');
           entry["Price per"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
           entry["Price per"] = "";
         }
 
         try {
-          var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div.a-section.a-spacing-none.a-spacing-top-small.s-price-instructions-style > div.a-row.a-size-base.a-color-secondary > span');
+          var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(4) > div.a-row.a-size-base.a-color-secondary > span');
           entry["Point"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
           entry["Point"] = "";
         }
-
-        try {
-          var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(4) > div.a-row.a-size-base.a-color-secondary.s-align-children-center > div.a-row.s-align-children-center > span > span:nth-child(4)');
-          entry["Shipping date"] = ratingElem ? ratingElem.innerText.trim() : "";
-        } catch (e) {
-          entry["Shipping date"] = "";
-        }
-
         try {
           var ratingElem = container.querySelector('div > div > div > div > span > div > div.a-section.a-spacing-base > div.a-section.a-spacing-small.puis-padding-left-small.puis-padding-right-small > div:nth-child(4) > div > div:nth-child(2) > span > span');
           entry["Shipping fee"] = ratingElem ? ratingElem.innerText.trim() : "";
@@ -150,7 +142,7 @@
         }
         
         try {
-          var ratingElem = container.querySelector('div > div > div > div > span > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div.font-ext-13.d-flex.btn-collection > div:nth-child(1) > a');
+          var ratingElem = container.querySelector('div > div > div > div > span > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(1) > div.font-ext-13.first-available-day.align-items-center > div > span:nth-child(3) > i');
           entry["Seller number"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
           entry["Seller number"] = "";
@@ -226,18 +218,18 @@
           entry["価格"] = "";
         }
 
+        // 評価の抽出（例：224行目付近）
         try {
           var ratingElem = container.querySelector('div > div > div > div > span > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(5) > span > span.exts-color-border-black.grade-hover.ml-ext-3.el-tooltip__trigger.el-tooltip__trigger > span:nth-child(1)');
-          entry["評価"] = ratingElem ? ratingElem.innerText.trim() : "";
+          entry["ReviewScore"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
-          entry["評価"] = "";
+          entry["ReviewScore"] = "";
         }
-
         try {
           var ratingElem = container.querySelector('div > div > div > div > span > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(5) > span > span.exts-color-border-black.grade-hover.ml-ext-3.el-tooltip__trigger.el-tooltip__trigger > span:nth-child(2)');
-          entry["評価数"] = ratingElem ? ratingElem.innerText.trim() : "";
+          entry["ReviewCount"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
-          entry["評価数"] = "";
+          entry["ReviewCount"] = "";
         }
 
         try {
