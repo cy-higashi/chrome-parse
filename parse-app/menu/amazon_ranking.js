@@ -73,9 +73,9 @@
         // -----------------------------
         try {
           let rankElem = container.querySelector('span.zg-bdg-text');
-          entry["Ranking"] = rankElem ? rankElem.innerText.trim() : "";
+          entry["SEO順位"] = rankElem ? rankElem.innerText.trim() : "";
         } catch (e) {
-          entry["Ranking"] = "";
+          entry["SEO順位"] = "";
         }
   
         // -----------------------------
@@ -83,9 +83,9 @@
         // -----------------------------
         try {
           let linkElem = container.querySelector('div > div > a');
-          entry["ProductLink"] = linkElem ? linkElem.href : "";
+          entry["URL"] = linkElem ? linkElem.href : "";
         } catch (e) {
-          entry["ProductLink"] = "";
+          entry["URL"] = "";
         }
   
         // -----------------------------
@@ -396,26 +396,25 @@
         //    例: 「評価(評価数): 4.4 (3,251)」
         // -----------------------------
         try {
-          let evalElem = container.querySelector('.quick-view .grade-pic');
-          if (evalElem) {
-            // "評価(評価数): 4.4(3,251)" 等をまるごと取得
-            let evalText = evalElem.innerText.replace(/\s+/g, ' ').trim();
-            // 正規表現で数字部分を抜き出し
-            let match = evalText.match(/(\d+(\.\d+)?)\s*\(([\d,]+)\)/);
-            if (match) {
-              entry["評価"] = match[1];       // 4.4
-              entry["評価数"] = match[3];     // 3,251
-            } else {
-              entry["評価"] = "";
-              entry["評価数"] = "";
-            }
+          // 指定セレクタのうち、インデックスID部は各コンテナに依存するため除外し、相当する末端構造にマッチ
+          // 親要素を特定
+          let ratingParent = container.querySelector('span.exts-color-border-black.grade-hover.ml-ext-3.el-tooltip__trigger.el-tooltip__trigger');
+          if (!ratingParent) {
+            ratingParent = container.querySelector('div.zg-grid-general-faceout div:nth-child(2) > div:nth-child(5) > span > span.exts-color-border-black.grade-hover.ml-ext-3.el-tooltip__trigger.el-tooltip__trigger');
+          }
+
+          if (ratingParent) {
+            const spans = ratingParent.querySelectorAll('span');
+            entry["ReviewScore"] = spans[0] ? spans[0].innerText.trim() : "";
+            const rawCount = spans[1] ? spans[1].innerText.trim() : "";
+            entry["ReviewCount"] = rawCount ? rawCount.replace(/[^0-9]/g, "") : "";
           } else {
-            entry["評価"] = "";
-            entry["評価数"] = "";
+            entry["ReviewScore"] = "";
+            entry["ReviewCount"] = "";
           }
         } catch (e) {
-          entry["評価"] = "";
-          entry["評価数"] = "";
+          entry["ReviewScore"] = "";
+          entry["ReviewCount"] = "";
         }
   
         // -----------------------------
