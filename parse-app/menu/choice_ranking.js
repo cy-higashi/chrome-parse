@@ -25,9 +25,9 @@
         // ランク番号の抽出（.card-product__status 内の <span>）
         try {
           var rankElem = container.querySelector('.card-product__status span');
-          entry["Rank"] = rankElem ? rankElem.innerText.trim() : "";
+          entry["SEO順位"] = rankElem ? rankElem.innerText.trim() : "";
         } catch (e) {
-          entry["Rank"] = "";
+          entry["SEO順位"] = "";
         }
   
         // 商品タイトルの抽出（.card-product__title）
@@ -52,9 +52,9 @@
           var commentText = commentElem ? commentElem.innerText.trim() : "";
           // 例: "感想(79)", "レビュー 1,234件" → 数字のみ抽出
           var numericMatch = commentText.replace(/,/g, '').match(/\d+/);
-          entry["Comments"] = numericMatch ? numericMatch[0] : "";
+          entry["ReviewCount"] = numericMatch ? numericMatch[0] : "";
         } catch (e) {
-          entry["Comments"] = "";
+          entry["ReviewCount"] = "";
         }
   
         // ポイントの抽出（.card-product__point）
@@ -68,17 +68,17 @@
         // 都市名の抽出（.card-product__city 内の <span>）
         try {
           var cityElem = container.querySelector('.card-product__city span');
-          entry["City"] = cityElem ? cityElem.innerText.trim() : "";
+          entry["Seller"] = cityElem ? cityElem.innerText.trim() : "";
         } catch (e) {
-          entry["City"] = "";
+          entry["Seller"] = "";
         }
   
         // 商品リンクの抽出（a.card-product__link.product-slider__product_detail）
         try {
           var linkElem = container.querySelector('a.card-product__link.product-slider__product_detail');
-          entry["ProductLink"] = linkElem ? linkElem.href : "";
+          entry["URL"] = linkElem ? linkElem.href : "";
         } catch (e) {
-          entry["ProductLink"] = "";
+          entry["URL"] = "";
         }
   
         extractedData.push(entry);
