@@ -65,9 +65,9 @@
 
         try {
             var ratingElem = container.querySelector('.card-product__city');
-            entry["City"] = ratingElem ? ratingElem.innerText.trim() : "";
+            entry["Seller"] = ratingElem ? ratingElem.innerText.trim() : "";
         } catch (e) {
-            entry["City"] = "";
+            entry["Seller"] = "";
         }
 
         try {
@@ -80,9 +80,9 @@
         // 商品リンクの抽出 (a.card-product__link)
         try {
           var linkElem = container.querySelector('a.card-product__link');
-          entry["ProductLink"] = linkElem ? linkElem.href : "";
+          entry["URL"] = linkElem ? linkElem.href : "";
         } catch (e) {
-          entry["ProductLink"] = "";
+          entry["URL"] = "";
         }
 
         // 商品説明の抽出 (div.card-product__text > p)
@@ -91,6 +91,16 @@
           entry["Description"] = descriptionElem ? descriptionElem.innerText.trim() : "";
         } catch (e) {
           entry["Description"] = "";
+        }
+        
+        // レビュー件数の抽出（テキストから数字のみ取得）
+        try {
+          var commentAnchor = container.querySelector('a.card-product__comment');
+          var text = commentAnchor ? commentAnchor.textContent : "";
+          var matched = text.replace(/[,，]/g, '').match(/\d+/);
+          entry["ReviewCount"] = matched ? matched[0] : "";
+        } catch (e) {
+          entry["ReviewCount"] = "";
         }
                 
         extractedData.push(entry);
