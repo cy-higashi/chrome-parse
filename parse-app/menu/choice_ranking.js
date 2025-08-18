@@ -49,7 +49,10 @@
         // コメント数の抽出（.card-product__comment）
         try {
           var commentElem = container.querySelector('.card-product__comment');
-          entry["Comments"] = commentElem ? commentElem.innerText.trim() : "";
+          var commentText = commentElem ? commentElem.innerText.trim() : "";
+          // 例: "感想(79)", "レビュー 1,234件" → 数字のみ抽出
+          var numericMatch = commentText.replace(/,/g, '').match(/\d+/);
+          entry["Comments"] = numericMatch ? numericMatch[0] : "";
         } catch (e) {
           entry["Comments"] = "";
         }
