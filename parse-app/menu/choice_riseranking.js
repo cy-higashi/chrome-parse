@@ -25,9 +25,9 @@
         // ランク番号の抽出（.card-product__status 内の <span>）
         try {
           var rankElem = container.querySelector('.card-product__status span');
-          entry["Rank"] = rankElem ? rankElem.innerText.trim() : "";
+          entry["SEO順位"] = rankElem ? rankElem.innerText.trim() : "";
         } catch (e) {
-          entry["Rank"] = "";
+          entry["SEO順位"] = "";
         }
   
         // タイトルの抽出（.card-product__title）
@@ -49,9 +49,12 @@
         // コメント数の抽出（.card-product__comment）— 急上昇ランキングには存在しない場合もあるので空欄に
         try {
           var commentElem = container.querySelector('.card-product__comment');
-          entry["Comments"] = commentElem ? commentElem.innerText.trim() : "";
+          var rawComment = commentElem ? commentElem.innerText.trim() : "";
+          var normalizedComment = rawComment.replace(/[０-９]/g, function(s) { return String.fromCharCode(s.charCodeAt(0) - 0xFEE0); });
+          var numericReviewCount = normalizedComment.replace(/[^0-9]/g, '');
+          entry["ReviewCount"] = numericReviewCount;
         } catch (e) {
-          entry["Comments"] = "";
+          entry["ReviewCount"] = "";
         }
   
         // ポイントの抽出（.card-product__point）— 同様に存在しない場合は空欄
@@ -65,17 +68,17 @@
         // 都市名の抽出（.card-product__city 内の <span>）
         try {
           var cityElem = container.querySelector('.card-product__city span');
-          entry["City"] = cityElem ? cityElem.innerText.trim() : "";
+          entry["Seller"] = cityElem ? cityElem.innerText.trim() : "";
         } catch (e) {
-          entry["City"] = "";
+          entry["Seller"] = "";
         }
   
         // 商品リンクの抽出（a.card-product__link.product-slider__product_detail）
         try {
           var linkElem = container.querySelector('a.card-product__link.product-slider__product_detail');
-          entry["ProductLink"] = linkElem ? linkElem.href : "";
+          entry["URL"] = linkElem ? linkElem.href : "";
         } catch (e) {
-          entry["ProductLink"] = "";
+          entry["URL"] = "";
         }
   
         extractedData.push(entry);
